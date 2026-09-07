@@ -37,6 +37,23 @@ def security_assessment(port):
     
     else:
         return "STANDARD SERVICE - Review configuration"
+
+def get_valid_port():
+    while True:
+        user_input = input(
+            "Enter a port number (1-65535), or type 'exit' to quit: "
+        )
+        if user_input.lower() == "exit":
+             return None
+        try:
+            port = int(user_input)
+            if 1 <= port <= 65535:
+                return port
+
+            else:
+                print("Port must be between 1 and 65535.")
+        except ValueError:
+            print ("Invalid input. Please enter a number.")
         
  
 high_risk_count = 0
@@ -44,6 +61,17 @@ medium_risk_count =  0
 review_required = 0
 
 display_header()
+port = get_valid_port()
+service = analyse_port(port)
+assessment = security_assessment(port)
+
+print("\n" + "-" * 40)
+print("SECURITY RESULT")
+print("-" * 40)
+
+print(f"Port: {port}")
+print(f"Service: {service}")
+print(f"Assessment: {assessment}")
 
 
 for port in common_ports:
