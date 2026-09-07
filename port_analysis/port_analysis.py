@@ -20,6 +20,7 @@ def analyse_port(port):
 
 
 def security_assessment(port):
+    
     if port == 23:
         return "HIGH RISK - telnet transmits data without encryption"
 
@@ -47,6 +48,7 @@ def get_valid_port():
              return None
         try:
             port = int(user_input)
+            
             if 1 <= port <= 65535:
                 return port
 
@@ -62,16 +64,19 @@ review_required = 0
 
 display_header()
 port = get_valid_port()
-service = analyse_port(port)
-assessment = security_assessment(port)
+if port is None:
+    print("Exiting the program")
+else:
+    service = analyse_port(port)
+    assessment = security_assessment(port)
 
-print("\n" + "-" * 40)
-print("SECURITY RESULT")
-print("-" * 40)
+    print("\n" + "-" * 40)
+    print("SECURITY RESULT")
+    print("-" * 40)
 
-print(f"Port: {port}")
-print(f"Service: {service}")
-print(f"Assessment: {assessment}")
+    print(f"Port: {port}")
+    print(f"Service: {service}")
+    print(f"Assessment: {assessment}")
 
 
 for port in common_ports:
