@@ -1,3 +1,4 @@
+
 def display_header():
     print("=" * 50)
     print("SECURITY TARGET INFORMATION TOOL")
@@ -15,30 +16,23 @@ def collect_target():
     }
     return target
 
+
+common_ports = {
+    21: "FTP",
+    22: "SSH",
+    23: "Telnet",
+    25: "SMTP",
+    53: "DNS",
+    80: "HTTP",
+    443: "HTTPS"
+}
 def analyse_port(port):
-    if port == 21:
-        return "FTP"
+    return common_ports.get(port)
 
-    if port == 22:
-        return "SSH"
-    
-    if port == 23:
-        return "Telnet"
-    
-    if port == 25:
-        return "SMTP"
-
-    if port == 53:
-        return "DNS"
-
-    elif port == 90:
-        return "HTTP"
-
-    elif port == 443:
-        return "HTTPS"
-
-    else:
-        return "Unknown"
+for port in common_ports:
+    print(f"Checking port {port}")
+    service = analyse_port(port)
+ 
 
 def security_assessment(port):
     if port == 23:
